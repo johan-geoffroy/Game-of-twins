@@ -1,0 +1,29 @@
+.game-container {
+  position: relative;
+
+  .twins-game {
+    position: absolute;
+    top: 10vh;
+    padding: 4%;
+    width: 30%;
+    background-color: #22313f;
+    color: white;
+    border-radius: 5px;
+
+    h2 {
+      text-align: center;
+    }
+
+    .form-game .btn-control .btn {
+      margin: 4%;
+    }
+
+    .result-game {
+      text-align: center;
+
+      p {
+        margin-top: 15px;
+      }
+    }
+  }
+}

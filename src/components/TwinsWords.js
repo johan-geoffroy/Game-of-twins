@@ -4,47 +4,83 @@ import React, { Component } from 'react';
 
 class TwinsWords extends Component {
 
-    
+
     constructor(props) {
         super(props);
 
         this.twinsFunction = this.twinsFunction.bind(this);
     }
 
+
     twinsFunction = (a, b) => {
 
-        let resultArray = [];
+        let stringA = a;
+        let stringB = b;
+        let newArray, resultArray;
+        let result = [];
 
-        if (a.length !== b.length) {
-            return false;
+
+        this.swapEven = (array, indexA, indexB) => {
+
+            let tempArray = array[indexA];
+
+            array[indexA] = array[indexB];
+            array[indexB] = tempArray;
+
+            return array;
         }
 
-        for (let i = 0; i < b.length; i++) {
+        this.compareArray = (arrayA, arrayB) => {
 
-            let newArray = this.swapEven(b[i]);
+            let joinArrayA = arrayA.join('');
+            let joinArrayB = arrayB.join('');
 
-            if (a[i] === newArray) {
 
-                resultArray.push(" Yes ");
+            if (joinArrayA.length !== joinArrayB.length) {
+
+                return false;
+            }
+
+            if (joinArrayA === joinArrayB) {
+
+                return result.push(' Yes ');
 
             } else {
-
-                resultArray.push(" No ");
+                return result.push(' No ');
             }
         }
-        return resultArray
+
+        //first swap
+        for (let i = 0; i < stringB.length; i++) {
+
+            let splitArray = stringB[i].split('');
+
+            for (let j = 0; j < splitArray.length; j++) {
+
+                if (splitArray[j] < splitArray[j + 1]) {
+
+                    newArray = this.swapEven(splitArray, j, j + 2);
+                }
+            }
+        }
+
+        //second swap
+        for (let k = 0; k < newArray.length; k++) {
+
+            resultArray = this.swapEven(newArray, 1, 4 - 1);
+
+            //compare string
+            this.compareArray(stringA, resultArray);
+        }
+
+        return result;
+
     }
 
-    swapEven = (array) => {
-
-        let newArray = array.split('').sort().join('');
-
-        return newArray;
-    }
 
     render() {
-        const a = ["abcd", "efgh", "test", "ijkl"];
-        const b = ["cdab", "ghef", "tset", "ijlk"];
+        const a = ["abcd"];
+        const b = ["cdab"];
         const results = this.twinsFunction(a, b);
 
         return (
